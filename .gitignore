@@ -129,9 +129,12 @@ dmypy.json
 .pyre/
 
 # Dataset
-dataset
+dataset*
 
 # Training GAN outputs and checkpoints
 image_at_epoch*
 
 training_checkpoints
+
+prev_images
+final_images
