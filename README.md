@@ -47,3 +47,8 @@ latent_dim = 128
 e 200
 lr 0.001
 
+lr0.046 > latent dim = 10
+
+Dont want too little KL loss. Causes images to be fully white, want some variability
+
+Just running fit function again and again with different learning rate gives better and better results?

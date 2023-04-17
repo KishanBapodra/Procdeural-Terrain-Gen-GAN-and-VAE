@@ -138,3 +138,4 @@ training_checkpoints
 
 prev_images
 final_images
+VAE_generated_images/imgs
