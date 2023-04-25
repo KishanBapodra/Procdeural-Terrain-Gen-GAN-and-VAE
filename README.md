@@ -1,54 +1,31 @@
-# Honors-Project
-Repository for Procedural Terrain Generation using Machine Learning project
+# Dissertation Project on Generative Deep Learning models for Procedural Terrain Generation
 
-GAN:
-1.  Tried with 100 epoch 32x32: batch size 64: and learning rate .0001
-2.  switched models to use 64x64:
-3.  tried 150 epoch:
+## Packages required:  
 
+All the python packages required are given in requirements.txt. Run the below code to install them all. 
 
-switched model to use 32x32 with 150 epoch
+```python
+pip install -r requirements.txt
+```
 
-VAE tried with 
-1.  latent space 2 , learning rate default, epochs = 50, got blank image and nan losses tooo high billions 
-2.  latent space 2 , learning rate 0.0001, epochs = 50, got some images but very different and losses around 300 and kl loss arouns 0-->5-->6
-3.  ls 32, lr 0.0001, e 50, similar results as (2.)
-4.  ls 32, lr 0.0001, e 200, not great results, with some almost blank images, and some extremely low res black area white area together images
-5.  ls 32, lr 0.001, e 200, decent results compared to before but still not any variation and large patches of either white or black areas and no gradient of those.
-6.  ls 128,lr 0.001, e 200, all images were the same. same gray color low res.
-7.  ls 64, lr 0.0005, e 200, decent blacks and white with some gradient but largely same large areas.
-8.  ls 64, lr 0.00005, e 50, some variation, some gradiants and bit more spaced out but , very low res looks 8x8 image
-9.  ls 64, lr 0.0001, e 500,  increasing epochs not a good idea.
-10. ls 32, lr 0.0001. e 75, 64x64, decent results. but mostly white in color with one image having a bit of a mix.
-11. ls 64, lr 0.001, e 75, 128x128, much better results compared to the rest. getting some wierd shape of some terrain but low detail
-12. ls 128,lr 0.00001 e 75, 128x128, patchy black and white mix color 
-    ls 128 not great
-13. ls 128,lr 0.0001, e 75, 256x256, decent shapes but nothing good but much better than before
-14. ls 128,lr 0.0004, e 75, 256x256, too bright, white is too dominant
+## Data Pre-processing
+Data preprocessing is done [here](./data-processing.ipynb). Images are deleted if their size is less than 305KB, or if they contain more than 50% pixels of extremely dark color (almost black). There is also code for resizing images to test the SSIM scores.
 
-NOT BEST ANYMORE
-img_shape = 256
-input_shape = (img_shape,img_shape,1)
-batch_size = 64
-ls = 128
-e 75
-lr 0.001
+## Terrain Generation
 
-16. 128, 0.004, 75, 256x256, no all the same and not good
-17. 128, 0.002, 75, 256x256, REALLY GOOD 
-18. 128, 0.003, 75, 256x256, Nooo, not good.  
-19. 128, 0.0009, 75, 256x256, good.  
+### Deep Learning models:  
 
-BEST YET
-img_shape = 256
-input_shape = (img_shape,img_shape,1)
-batch_size = 64
-latent_dim = 128
-e 200
-lr 0.001
+#### DCGAN  
+The DCGAN code is located in the [DCGAN](./DCGAN.ipynb) file. It consists of importing the packages, initializing hyperparameters, along with different architectures used, most of which have been commented out, followed by adding loss functions and then training the DCGAN. The models trained are saved using the TensorFlow's ``save()`` method.  
+There are also code cells for loading the model and generating images using the loaded model for performance testing.  
 
-lr0.046 > latent dim = 10
+#### VAE
+The VAE code is located in the [VAE](./VAE.ipynb) file. Follows similar pattern of DCGAN.
 
-Dont want too little KL loss. Causes images to be fully white, want some variability
+### Traditional Method
+#### Perlin noise
+The code for perlin noise is located [here](./PerlinNoise.ipynb). perlin_noise library has been installed which is referenced in the disseration report. Multiple images are generated and plotted which are then used to create 3d models of terrain and for some comparative analysis.
 
-Just running fit function again and again with different learning rate gives better and better results?
+## Testing SSIM Score  
+The code for SSIM testing can be found [here](./Similiarity_score.ipynb). The generated images from VAE and DCGAN are located in the test folders (in VAE_generated_images and GAN_generated_images) which are compared to the resized images [located here](./dataset_resized/) from original dataset [located here](./dataset_1/)
+
