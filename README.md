@@ -7,9 +7,11 @@ All the python packages required are given in requirements.txt. Run the below co
 ```python
 pip install -r requirements.txt
 ```
+## Dataset
+The original dataset is found on Kaggle and can be downloaded ([here](https://www.kaggle.com/datasets/tpapp157/earth-terrain-height-and-segmentation-map-images?select=0018_h.png)). It contains 5000 images each of elevation height maps, terrain maps and segmentations maps. 
 
 ## Data Pre-processing
-Data preprocessing is done [here](./data-processing.ipynb). Images are deleted if their size is less than 305KB, or if they contain more than 50% pixels of extremely dark color (almost black). There is also code for resizing images to test the SSIM scores.
+Data preprocessing is done [here](./data-processing.ipynb). Images are deleted if their size is less than 305KB, or if they contain more than 50% pixels of extremely dark color (almost black). There is also code for resizing images to test the SSIM scores. The final dataset used is dataset-1.
 
 ## Terrain Generation
 
